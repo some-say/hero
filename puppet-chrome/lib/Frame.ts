@@ -187,7 +187,7 @@ export default class Frame extends TypedEventEmitter<IPuppetFrameEvents> impleme
     });
   }
 
-  public async evaluateOnNode<T>(nodeId: string, expression: string): Promise<T> {
+  public async evaluateOnNode<T>(remoteObjectId: string, expression: string): Promise<T> {
     if (this.closedWithError) throw this.closedWithError;
     try {
       const result = await this.devtoolsSession.send('Runtime.callFunctionOn', {
@@ -195,7 +195,7 @@ export default class Frame extends TypedEventEmitter<IPuppetFrameEvents> impleme
         return ${expression};
       }`,
         returnByValue: true,
-        objectId: nodeId,
+        objectId: remoteObjectId,
       });
       if (result.exceptionDetails) {
         throw ConsoleMessage.exceptionToError(result.exceptionDetails);

@@ -596,12 +596,12 @@ b) Use the UserProfile feature to set cookies for 1 or more domains before they'
     return this.runFn<T>(fnName, callFn);
   }
 
-  public async getDomNodeId(puppetNodeId: string): Promise<number> {
+  public async getDomNodeId(remoteObjectId: string): Promise<number> {
     const nodeId = await this.puppetFrame.evaluateOnNode<number>(
-      puppetNodeId,
+      remoteObjectId,
       'NodeTracker.watchNode(this)',
     );
-    this.puppetNodeIdsByHeroNodeId[nodeId] = puppetNodeId;
+    this.puppetNodeIdsByHeroNodeId[nodeId] = remoteObjectId;
     return nodeId;
   }
 
